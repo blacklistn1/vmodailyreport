@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> </title>
+</head>
+<body>
+    <%- include('../nav') %> 
+    <h1>All blogs</h1> 
+        <div>
+        <% if (blogs.length > 0) { %> 
+        <% blogs.forEach(blog => { %> 
+            <h3>
+                <a href="/blogs/<%= blog._id %> ">
+                    <%= blog.title %>
+                </a>
+            </h3>
+            <p style="font-size: 75%; color: gray"><%= blog.snippet %></p>
+            <p><%= blog.body %> </p>
+        <% }) %>  
+        <% } else { %> 
+            <p>There are currently no blogs.</p>
+        <% } %> 
+    </div>
+</body>
+</html>

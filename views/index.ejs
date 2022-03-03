@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ExpressDemo</title>
+</head>
+<body>
+    <%- include('./nav.ejs') %>
+<h1>Welcome to ExpressJS tutorial page</h1>
+<h2>Welcome <%= user %></h2>
+<% if (streamers.length > 0) { %>
+    <ul>
+    <% streamers.forEach(s => { %>
+        <li><%= s.name %> from <%= s.branch %></li>
+    <% }) %>
+    </ul>
+<% } else{ %>
+    <p>There are currently no streamers available</p>
+<% } %>
+</body>
+</html>

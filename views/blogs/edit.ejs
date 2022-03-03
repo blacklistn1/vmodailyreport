@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0">
+    <title>Edit blog</title>
+</head>
+<body>
+    <div class="create-blog">
+        <form action="/blogs/<%= blog._id %>" method="POST" id="updateForm">
+            <label for="title">Title: </label>
+            <input name="title" type="text" id="title" placholder="Title..." value="<%= blog.title %>" required>
+            <label for="snippet">Snippet: </label>
+            <input name="snippet" type="text" id="snippet" placeholder="Snippet..." value="<%= blog.snippet %>" required>
+            <label for="body">Body:</label>
+            <textarea name="body" id="body" cols="30" rows="10"><%= blog.body %></textarea>
+            <button type="button" id="update" data-id="<%= blog._id %>">Confirm Update</button>
+        </form>
+    </div>
+
+    <script>
+        const updateBtn = document.querySelector('button#update');
+        const updateForm = document.querySelector('#updateForm');
+        const endpoint = `/blogs/${updateBtn.dataset.id}`;
+        
+        updateBtn.addEventListener('click', e => {
+            const formReq = {
+                title: updateForm['title'].value,
+                snippet: updateForm['snippet'].value,
+                body: updateForm['body'].value
+            };
+            console.log(formReq);
+            fetch(endpoint, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type' : 'application/json',
+                    'charset' : 'UTF-8'
+                },
+                body: JSON.stringify(formReq)
+            })
+            .then(res => res.json())
+            .then(data => window.location.href = data.redirect)
+            .catch(err => console.err(err))
+        })
+    </script>
+</body>
+</html>
